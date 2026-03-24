@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제64회 진해 군항제 안내</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  :root {
+    --pink-deep: #c84b6e;
+    --pink-mid: #e8739a;
+    --pink-light: #f9d0df;
+    --pink-pale: #fff0f5;
+    --navy: #1a2a4a;
+    --navy-mid: #2e4472;
+    --gold: #c9a84c;
+    --white: #ffffff;
+    --gray: #6b7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--pink-pale);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── 헤더 ── */
+  .hero {
+    position: relative;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #4a2060 100%);
+    padding: 60px 24px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* 벚꽃 떨어지는 효과 */
+  .petal {
+    position: absolute;
+    width: 10px; height: 10px;
+    background: radial-gradient(circle, #ffb6c1 40%, transparent 70%);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+    pointer-events: none;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 12px; font-weight: 700;
+    padding: 4px 14px; border-radius: 20px;
+    letter-spacing: 2px; margin-bottom: 18px;
+  }
+
+  .hero-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(32px, 8vw, 52px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .hero-title span { color: var(--pink-mid); }
+
+  .hero-date-box {
+    display: inline-flex; flex-direction: column; gap: 6px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 18px 32px;
+    margin-top: 10px;
+  }
+  .hero-date-box .date {
+    font-size: clamp(18px, 5vw, 26px);
+    font-weight: 700; color: var(--white);
+    letter-spacing: 1px;
+  }
+  .hero-date-box .period {
+    font-size: 13px; color: var(--pink-light);
+  }
+  .hero-date-box .place {
+    font-size: 13px; color: rgba(255,255,255,0.75);
+    margin-top: 4px;
+  }
+
+  /* ── 섹션 공통 ── */
+  .section {
+    padding: 48px 20px;
+    max-width: 680px; margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--pink-deep); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-label::before {
+    content: ''; width: 30px; height: 2px; background: var(--pink-deep);
+  }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 700; color: var(--navy);
+    margin-bottom: 28px; line-height: 1.4;
+  }
+
+  /* ── 프로그램 카드 ── */
+  .program-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 420px) {
+    .program-grid { grid-template-columns: 1fr; }
+  }
+
+  .prog-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 20px 18px;
+    border-left: 4px solid var(--pink-mid);
+    box-shadow: 0 4px 20px rgba(200, 75, 110, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .prog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(200, 75, 110, 0.15);
+  }
+  .prog-card.featured {
+    grid-column: 1 / -1;
+    border-left-color: var(--gold);
+    background: linear-gradient(135deg, #fffbef 0%, #fff8e1 100%);
+  }
+
+  .prog-icon { font-size: 26px; margin-bottom: 10px; }
+  .prog-name {
+    font-weight: 700; font-size: 15px;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .prog-meta {
+    font-size: 11px; color: var(--gray); line-height: 1.6;
+  }
+  .prog-meta span { display: block; }
+  .prog-meta .highlight { color: var(--pink-deep); font-weight: 600; }
+
+  /* ── 일정표 ── */
+  .schedule-wrap {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+
+  .schedule-header {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 16px 24px;
+    color: var(--white); font-weight: 700; font-size: 15px;
+  }
+
+  .schedule-row {
+    display: grid; grid-template-columns: 90px 1fr;
+    border-bottom: 1px solid #f0e4ea;
+    align-items: stretch;
+  }
+  .schedule-row:last-child { border-bottom: none; }
+
+  .sch-date {
+    background: var(--pink-pale);
+    padding: 14px 12px;
+    font-size: 12px; font-weight: 700;
+    color: var(--pink-deep);
+    text-align: center;
+    display: flex; align-items: center; justify-content: center;
+    border-right: 1px solid #f0e4ea;
+    line-height: 1.5;
+  }
+
+  .sch-items { padding: 14px 16px; }
+  .sch-item {
+    font-size: 13px; color: var(--navy);
+    padding: 3px 0;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .sch-item::before {
+    content: '🌸'; font-size: 11px;
+  }
+
+  /* ── 관광안내 탭 ── */
+  .info-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .info-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px 10px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    text-decoration: none; color: inherit;
+    transition: transform 0.2s;
+    display: block;
+  }
+  .info-card:hover { transform: translateY(-3px); }
+  .info-card .ic { font-size: 28px; margin-bottom: 8px; }
+  .info-card .ic-label { font-size: 12px; font-weight: 600; color: var(--navy); }
+
+  /* ── 연락처 ── */
+  .contact-box {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: 20px;
+    padding: 30px 24px;
+    color: var(--white);
+    text-align: center;
+  }
+  .contact-box h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px; margin-bottom: 18px;
+    font-weight: 700;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 12px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .contact-item .ci-label { font-size: 11px; color: var(--pink-light); display: block; }
+  .contact-item .ci-val { font-weight: 600; }
+
+  .btn-official {
+    display: inline-block; margin-top: 18px;
+    background: var(--pink-mid);
+    color: var(--white);
+    font-weight: 700; font-size: 14px;
+    padding: 13px 32px; border-radius: 30px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+  .btn-official:hover { background: var(--pink-deep); }
+
+  /* ── 가볼만한 곳 ── */
+  .spot-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .spot-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    transition: transform 0.2s;
+  }
+  .spot-card:hover { transform: translateY(-3px); }
+
+  .spot-thumb {
+    background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; padding: 16px 8px;
+    min-height: 100px;
+  }
+  .spot-thumb .s-icon { font-size: 30px; }
+  .spot-thumb .s-rank {
+    font-size: 10px; font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px; padding: 2px 6px;
+  }
+
+  .spot-body { padding: 16px 18px; }
+  .spot-name {
+    font-weight: 700; font-size: 15px;
+    color: var(--navy); margin-bottom: 5px;
+  }
+  .spot-desc {
+    font-size: 12px; color: var(--gray);
+    line-height: 1.7; margin-bottom: 8px;
+  }
+  .spot-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .spot-tag {
+    font-size: 10px; font-weight: 600;
+    background: var(--pink-pale);
+    color: var(--pink-deep);
+    border: 1px solid var(--pink-light);
+    border-radius: 10px; padding: 2px 8px;
+  }
+  .spot-tag.navy {
+    background: #eef1f8; color: var(--navy-mid);
+    border-color: #c8d0e8;
+  }
+
+  /* ── 푸터 ── */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px; color: var(--gray);
+    line-height: 1.8;
+    border-top: 1px solid var(--pink-light);
+    background: var(--white);
+  }
+  .footer strong { color: var(--navy); }
+
+  /* 벚꽃 구분선 */
+  .divider {
+    text-align: center; font-size: 18px;
+    letter-spacing: 6px; color: var(--pink-mid);
+    margin: -10px 0 32px;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<!-- 🌸 헤더 영역 -->
+<header class="hero" id="heroSection">
+  <!-- 벚꽃 효과 (JS로 생성) -->
+  <div class="hero-badge">🌸 CHERRY BLOSSOM FESTIVAL 2026</div>
+  <p class="hero-num">제 64회</p>
+  <h1 class="hero-title">진해<span> 군항제</span></h1>
+  <div class="hero-date-box">
+    <span class="date">2026. 03. 27 ~ 04. 05</span>
+    <span class="period">🌸 10일간의 벚꽃 축제</span>
+    <span class="place">📍 창원시 진해구 중원로터리 및 진해루 일원</span>
+  </div>
+</header>
+
+<!-- ── 주요 프로그램 ── -->
+<section class="section">
+  <p class="section-label">Programs</p>
+  <h2 class="section-title">주요 프로그램</h2>
+  <div class="divider">✿ ✿ ✿</div>
+
+  <div class="program-grid">
+
+    <!-- 피처드 -->
+    <div class="prog-card featured">
+      <div class="prog-icon">🎵</div>
+      <div class="prog-name">체리블라썸 뮤직 페스티벌</div>
+      <div class="prog-meta">
+        <span class="highlight">📅 04.03(금) 17:00 ~ 04.05(일) 21:00</span>
+        <span>📍 진해공설운동장</span>
+        <span>트롯 · K-POP · 밴드 음악! 전세대가 즐기는 봄의 뮤직 페스티벌</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">🍺</div>
+      <div class="prog-name">군항 빌리지</div>
+      <div class="prog-meta">
+        <span class="highlight">📅 03.27 ~ 04.05</span>
+        <span>📍 중원로터리 ~ 창범슈퍼</span>
+        <span>전국 유명 맛집과 맥주가 한자리에!</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">🛍️</div>
+      <div class="prog-name">군항 브랜드 페어</div>
+      <div class="prog-meta">
+        <span class="highlight">📅 03.27 ~ 04.05</span>
+        <span>📍 중원로터리 ~ 미진이지비아APT</span>
+        <span>전국 생활·잡화·농수산물 특별 장터</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">🌙</div>
+      <div class="prog-name">군항 나이트 페스타</div>
+      <div class="prog-meta">
+        <span class="highlight">📅 03.30 ~ 04.05 (19~21시)</span>
+        <span>📍 중원로터리</span>
+        <span>진해의 밤을 열기로 가득 채울 나이트 페스타!</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">⚓</div>
+      <div class="prog-name">군부대 개방행사</div>
+      <div class="prog-meta">
+        <span class="highlight">📅 03.28 ~ 04.05</span>
+        <span>📍 해군사관학교 · 진해기지사령부 · 11부두</span>
+        <span>군복체험, 장비 탑승, 무기체계 체험</span>
+      </div>
+    </div>
+
+    <div class="prog-card">
+      <div class="prog-icon">🥁</div>
+      <div class="prog-name">군악의장 페스티벌</div>
+      <div class="prog-meta">
+        <span class="highlight">📅 축제 기간 중</span>
+        <span>블라썸 퍼레이드 등 공식 행사 진행</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 일정표 ── -->
+<section class="section" style="padding-top: 0;">
+  <p class="section-label">Schedule</p>
+  <h2 class="section-title">행사 일정</h2>
+  <div class="divider">✿ ✿ ✿</div>
+
+  <div class="schedule-wrap">
+    <div class="schedule-header">🗓️ 제64회 진해 군항제 주요 일정</div>
+
+    <div class="schedule-row">
+      <div class="sch-date">3/27<br>금<br>개막</div>
+      <div class="sch-items">
+        <div class="sch-item">개막식</div>
+        <div class="sch-item">군항 빌리지 · 브랜드 페어 시작</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="sch-date">3/28<br>토</div>
+      <div class="sch-items">
+        <div class="sch-item">군부대 개방행사 시작</div>
+        <div class="sch-item">해군사관학교 · 진해기지사령부</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="sch-date">3/30<br>월</div>
+      <div class="sch-items">
+        <div class="sch-item">군항 나이트 페스타 시작</div>
+        <div class="sch-item">매일 19:00 ~ 21:00</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="sch-date">4/3<br>금</div>
+      <div class="sch-items">
+        <div class="sch-item">체리블라썸 뮤직 페스티벌 개막</div>
+        <div class="sch-item">진해공설운동장 17:00~21:00</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="sch-date">4/4~5<br>토·일</div>
+      <div class="sch-items">
+        <div class="sch-item">체리블라썸 뮤직 페스티벌</div>
+        <div class="sch-item">14:00 ~ 21:00 (주말 낮부터!)</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="sch-date">4/5<br>일<br>폐막</div>
+      <div class="sch-items">
+        <div class="sch-item">모든 행사 마무리</div>
+        <div class="sch-item">10일간의 벚꽃 축제 폐막</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 관광안내 ── -->
+<section class="section" style="padding-top: 0;">
+  <p class="section-label">Tourist Info</p>
+  <h2 class="section-title">관광 안내</h2>
+  <div class="divider">✿ ✿ ✿</div>
+
+  <div class="info-grid">
+    <a class="info-card" href="https://www.jgfestival.or.kr/sub/map.php" target="_blank">
+      <div class="ic">🚌</div>
+      <div class="ic-label">교통안내</div>
+    </a>
+    <a class="info-card" href="https://shuttle.kakaomobility.com/shuttles?slideIndex=0&categoryId=52" target="_blank">
+      <div class="ic">🚍</div>
+      <div class="ic-label">공식 셔틀</div>
+    </a>
+    <a class="info-card" href="https://changwon.go.kr/tour/index.do?page.pageNo=1&menuCode=001_004005001000&search.searchCategory=TH" target="_blank">
+      <div class="ic">🏨</div>
+      <div class="ic-label">숙박안내</div>
+    </a>
+    <a class="info-card" href="https://changwon.go.kr/tour/index.do?menuCode=001_004004002000&search.searchKeyword=&page.pageNo=1&search.searchCategory=CGR" target="_blank">
+      <div class="ic">🍽️</div>
+      <div class="ic-label">식당안내</div>
+    </a>
+    <a class="info-card" href="https://www.jgfestival.or.kr/sub/info3.php#tab1" target="_blank">
+      <div class="ic">🗺️</div>
+      <div class="ic-label">행사장 위치</div>
+    </a>
+    <a class="info-card" href="https://changwon.go.kr/tour/index.do?menuCode=001_001002000000" target="_blank">
+      <div class="ic">🌊</div>
+      <div class="ic-label">창원관광</div>
+    </a>
+  </div>
+
+  <!-- 주의사항 -->
+  <div style="background:#fff3f6; border-radius:14px; padding:18px 20px; margin-top:20px; border:1px solid #f9c8d6;">
+    <p style="font-weight:700; font-size:14px; color:var(--pink-deep); margin-bottom:10px;">⚠️ 방문 전 확인하세요</p>
+    <ul style="font-size:13px; color:#555; line-height:2; padding-left:16px;">
+      <li>축제 기간 중 진해 시내 교통 혼잡 예상 → <strong>대중교통 이용 권장</strong></li>
+      <li>공식 셔틀버스 운행 (카카오모빌리티 앱에서 예약)</li>
+      <li>드론 비행 금지 구역 있음 (사전 확인 필수)</li>
+      <li>벚꽃 절정 예상: 3월 말 ~ 4월 초</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 가볼만한 곳 ── -->
+<section class="section" style="padding-top: 0;">
+  <p class="section-label">Must-Visit Spots</p>
+  <h2 class="section-title">꼭 가봐야 할 벚꽃 명소</h2>
+  <div class="divider">✿ ✿ ✿</div>
+
+  <div class="spot-list">
+
+    <div class="spot-card">
+      <div class="spot-thumb">
+        <div class="s-icon">🌉</div>
+        <div class="s-rank">TOP 1</div>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">여좌천 로망스다리</div>
+        <div class="spot-desc">
+          약 1.5km 하천 양쪽에 벚나무가 빼곡해 분홍빛 터널을 만드는 진해 최고의 명소.
+          드라마 '로망스' 촬영지로 유명하며, <strong>밤에는 조명</strong>이 켜져 더욱 낭만적입니다.
+          CNN이 선정한 '한국에서 가봐야 할 곳 TOP 50'에 꼽혔어요.
+        </div>
+        <div class="spot-tags">
+          <span class="spot-tag">📍 여좌동 217</span>
+          <span class="spot-tag">🌙 야간 조명</span>
+          <span class="spot-tag">📸 인생샷 명소</span>
+          <span class="spot-tag navy">진해역에서 도보 5분</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-thumb">
+        <div class="s-icon">🚂</div>
+        <div class="s-rank">TOP 2</div>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">경화역 벚꽃길</div>
+        <div class="spot-desc">
+          폐역된 철길 양쪽으로 약 800m 벚꽃 터널이 이어지는 레트로 감성 명소.
+          기차가 다니지 않아 <strong>철길 위를 자유롭게 걸으며</strong> 사진을 찍을 수 있어요.
+          바람이 불면 꽃잎이 눈처럼 흩날려 감동 그 자체!
+        </div>
+        <div class="spot-tags">
+          <span class="spot-tag">📍 경화동 산5-1</span>
+          <span class="spot-tag">🛤️ 800m 벚꽃 터널</span>
+          <span class="spot-tag">🎞️ 레트로 감성</span>
+          <span class="spot-tag navy">길거리 음식·기념품</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-thumb">
+        <div class="s-icon">🗼</div>
+        <div class="s-rank">TOP 3</div>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">제황산공원 & 진해탑</div>
+        <div class="spot-desc">
+          <strong>모노레일</strong>을 타고 올라가면 진해 시내 36만 그루 벚나무가 분홍빛 바다처럼 펼쳐지는 전망대.
+          365개 계단으로 걸어 올라갈 수도 있어요. 진해탑 옥상에서 바다와 벚꽃을 한눈에!
+        </div>
+        <div class="spot-tags">
+          <span class="spot-tag">🚡 모노레일 운행</span>
+          <span class="spot-tag">🏔️ 진해 전체 전망</span>
+          <span class="spot-tag navy">왕복 어른 3,000원</span>
+          <span class="spot-tag navy">9시~22시 운행(축제 기간)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-thumb">
+        <div class="s-icon">⛰️</div>
+        <div class="s-rank">TOP 4</div>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">안민고개</div>
+        <div class="spot-desc">
+          진해와 창원을 잇는 약 4km 고갯길. 만개 시기에는 도로 양쪽 벚꽃이 지붕처럼 터널을 이루어
+          <strong>드라이브 코스</strong>로 최고! 정상 전망대에서 진해 시가지와 진해만을 내려다볼 수 있어요.
+        </div>
+        <div class="spot-tags">
+          <span class="spot-tag">🚗 드라이브 코스</span>
+          <span class="spot-tag">🌊 바다 전망</span>
+          <span class="spot-tag navy">주말 차량 통제 가능 → 셔틀 이용</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-thumb">
+        <div class="s-icon">⚓</div>
+        <div class="s-rank">TOP 5</div>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">해군사관학교</div>
+        <div class="spot-desc">
+          평소엔 들어갈 수 없는 해군사관학교가 군항제 기간에만 특별 개방!
+          <strong>100년 넘은 왕벚나무</strong>가 있어 시내보다 더 풍성한 벚꽃을 만날 수 있어요.
+          거북선 관람, 해군복 체험, 함정 공개, 요트 크루즈 승선도 가능!
+        </div>
+        <div class="spot-tags">
+          <span class="spot-tag">🎌 군항제 기간만 개방</span>
+          <span class="spot-tag">⛵ 요트 크루즈</span>
+          <span class="spot-tag">🐢 거북선 관람</span>
+          <span class="spot-tag navy">100년 이상 왕벚나무</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-thumb">
+        <div class="s-icon">🌊</div>
+        <div class="s-rank">TIP</div>
+      </div>
+      <div class="spot-body">
+        <div class="spot-name">진해내수면 환경생태공원</div>
+        <div class="spot-desc">
+          중원로터리 근처 조용한 명소. 수면 위에 비치는 벚꽃 반영이 아름다워
+          <strong>사진작가들이 특히 사랑하는 곳</strong>이에요. 인파가 적어 여유롭게 산책하기 좋습니다.
+        </div>
+        <div class="spot-tags">
+          <span class="spot-tag">📷 반영 사진 명소</span>
+          <span class="spot-tag">🚶 한적한 산책</span>
+          <span class="spot-tag navy">숨은 명소 추천</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 꿀팁 박스 -->
+  <div style="background: linear-gradient(135deg,#fff8e1,#fff3e0); border-radius:14px; padding:18px 20px; margin-top:20px; border:1px solid #ffe0a0;">
+    <p style="font-weight:700; font-size:14px; color:#b8860b; margin-bottom:10px;">💡 명소 방문 꿀팁</p>
+    <ul style="font-size:13px; color:#555; line-height:2.1; padding-left:16px;">
+      <li><strong>벚꽃 절정 예상:</strong> 3월 31일 전후 → 이날 방문하면 최고!</li>
+      <li>여좌천은 <strong>낮 + 야간 조명</strong> 둘 다 방문하면 두 배 감동</li>
+      <li>경화역은 <strong>아침 일찍</strong> 가면 인파 없이 여유롭게 촬영 가능</li>
+      <li>제황산 모노레일은 <strong>줄이 길 수 있어</strong> 오전 일찍 추천</li>
+      <li>모든 명소가 도보 이동 가능 거리 → <strong>걷기 편한 신발</strong> 필수!</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 연락처 ── -->
+<section class="section" style="padding-top: 0;">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">문의 및 공식 채널</h2>
+  <div class="divider">✿ ✿ ✿</div>
+
+  <div class="contact-box">
+    <h3>📞 진해 군항제 사무국</h3>
+    <div class="contact-item">
+      <span>📞</span>
+      <div>
+        <span class="ci-label">전화 문의</span>
+        <span class="ci-val">055-546-4310 · 055-542-8222</span>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span>📠</span>
+      <div>
+        <span class="ci-label">팩스</span>
+        <span class="ci-val">055-545-4635</span>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span>📧</span>
+      <div>
+        <span class="ci-label">이메일</span>
+        <span class="ci-val">syh4310@hanmail.net</span>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span>📍</span>
+      <div>
+        <span class="ci-label">주소</span>
+        <span class="ci-val">창원시 진해구 백구로 41-1 (광화동)</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a class="btn-official" href="https://www.jgfestival.or.kr" target="_blank">🌐 공식 홈페이지</a>
+      <a class="btn-official" style="background: #833ab4;" href="https://www.instagram.com/jgfestival" target="_blank">📸 인스타그램</a>
+    </div>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer class="footer">
+  <p>🌸 <strong>제 64회 진해 군항제</strong> 🌸</p>
+  <p>사단법인 이충무공선양군항제위원회</p>
+  <p style="margin-top: 8px; color: #aaa; font-size: 11px;">본 안내문은 공식 홈페이지(jgfestival.or.kr) 정보를 바탕으로 제작되었습니다.</p>
+</footer>
+
+<script>
+  // 벚꽃 떨어지는 효과 생성
+  const hero = document.getElementById('heroSection');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${6 + Math.random() * 8}px;
+      height: ${6 + Math.random() * 8}px;
+      animation-duration: ${4 + Math.random() * 6}s;
+      animation-delay: ${Math.random() * 5}s;
+      opacity: ${0.4 + Math.random() * 0.5};
+    `;
+    hero.appendChild(p);
+  }
+</script>
+</body>
+</html>
